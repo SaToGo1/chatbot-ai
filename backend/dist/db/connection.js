@@ -1,7 +1,11 @@
 import mongoose from 'mongoose';
 export default async function connectToDatabase() {
     try {
-        await mongoose.connect(process.env.URI);
+        if (!process.env.URI) {
+            throw new Error('mongo url not defined');
+        }
+        const conn = await mongoose.connect(process.env.URI);
+        console.log(`MongoDb connected`);
     }
     catch (error) {
         console.error(error);
