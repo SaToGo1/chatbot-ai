@@ -1,2 +1,10 @@
 ### First Route
 GET http://localhost:5000/hello
+
+### First Route POST
+POST http://localhost:5000/hello
+Content-Type: application/json
+
+{
+    "name": "Satogo"
+}
