@@ -1,5 +1,14 @@
-export function getAllUsers() { }
-() => {
-    // get all users for database
+import User from "../models/User.js";
+export const getAllUsers = async (req, res, next) => {
+    try {
+        // get all users for database
+        const users = await User.find({});
+        return res.status(200).json({ message: "OK", users });
+    }
+    catch (error) {
+        console.log(error);
+        const message = error.message;
+        return res.status(200).json({ message: "ERROR", cause: message });
+    }
 };
 //# sourceMappingURL=user-controller.js.map
