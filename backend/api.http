@@ -19,5 +19,25 @@ Content-Type: application/json
 {
     "name": "Satogo",
     "email": "satogo@test.com",
+    "password": "123456"
+}
+
+### POST user bad email
+POST http://localhost:5000/api/v1/user/signup
+Content-Type: application/json
+
+{
+    "name": "Satogo",
+    "email": "satogotest.com",
+    "password": "12345"
+}
+
+### POST user short pass
+POST http://localhost:5000/api/v1/user/signup
+Content-Type: application/json
+
+{
+    "name": "Satogo",
+    "email": "satogo@test.com",
     "password": "12345"
 }
