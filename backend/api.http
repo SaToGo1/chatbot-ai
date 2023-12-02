@@ -11,3 +11,13 @@ Content-Type: application/json
 
 ### GET All Users
 GET http://localhost:5000/api/v1/user
+
+### POST user
+POST http://localhost:5000/api/v1/user/signup
+Content-Type: application/json
+
+{
+    "name": "Satogo",
+    "email": "satogo@test.com",
+    "password": "12345"
+}
