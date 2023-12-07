@@ -41,7 +41,7 @@ describe('testing Tests', () => {
 
         assert.equal(actualValue, expectedValue);
         done();
-    })
+    });
 })
 
 describe('Testing Basic Requests', () => {
@@ -50,9 +50,10 @@ describe('Testing Basic Requests', () => {
             .get(baseRoute)
             .end((err, res) => {
                 assert.equal(res.status, 200)
+                assert.equal(res.type, 'application/json')
                 done();
-            })
-    })
+            });
+    });
 
     it('POST signup creates an user', async () => {
         const response = await chai
@@ -62,11 +63,12 @@ describe('Testing Basic Requests', () => {
                 "name": "Satogo",
                 "email": "satogo@test.com",
                 "password": "123456"
-            })
+            });
 
-            assert.equal(response.status, 201)
-            assert.equal(response.body.message, "OK")
-    })
+        assert.equal(response.status, 201);
+        assert.equal(response.type, 'application/json');
+        assert.equal(response.body.message, "OK");
+    });
 
     it('POST login a user', async () => {
         const response = await chai
@@ -75,11 +77,12 @@ describe('Testing Basic Requests', () => {
             .send({
                 "email": "satogo@test.com",
                 "password": "123456"
-            })
+            });
 
-            assert.equal(response.status, 200)
-            assert.equal(response.body.message, "OK")
-    })
+        assert.equal(response.status, 200);
+        assert.equal(response.type, 'application/json');
+        assert.equal(response.body.message, "OK");
+    });
 })
 
 describe('Testing POST User Creation Validations', () => {
@@ -87,7 +90,7 @@ describe('Testing POST User Creation Validations', () => {
         await User.deleteOne({
             "email": "notRegistered@test.com"
         });
-    })
+    });
 
     it('fails to post an user with bad email', (done) => {
         chai.request(app)
@@ -98,11 +101,12 @@ describe('Testing POST User Creation Validations', () => {
                 "password": "123456"
             })
             .end((err, res) => {
-                assert.equal(res.status, 422)
-                assert.equal(res.body.errors[0].msg, 'email is required')
+                assert.equal(res.status, 422);
+                assert.equal(res.body.errors[0].msg, 'email is required');
+                assert.equal(res.type, 'application/json');
                 done();
-            })
-    })
+            });
+    });
 
     it('fails to post an user with short password', (done) => {
         chai.request(app)
@@ -113,11 +117,12 @@ describe('Testing POST User Creation Validations', () => {
                 "password": "12345"
             })
             .end((err, res) => {
-                assert.equal(res.status, 422)
-                assert.equal(res.body.errors[0].msg, 'password should contain atleast 6 characters')
+                assert.equal(res.status, 422);
+                assert.equal(res.body.errors[0].msg, 'password should contain atleast 6 characters');
+                assert.equal(res.type, 'application/json');
                 done();
-            })
-    })
+            });
+    });
 
     it('fails to login a user with incorrect password', async () => {
         const response = await chai
@@ -126,11 +131,12 @@ describe('Testing POST User Creation Validations', () => {
             .send({
                 "email": "satogo@test.com",
                 "password": "654321abc"
-            })
+            });
 
             assert.equal(response.status, 403);
+            assert.equal(response.type, 'text/html');
             assert.equal(response.text, "Incorrect password");
-    })
+    });
 
     it('fails to login when user does not exist', async () => {
         const response = await chai
@@ -139,9 +145,10 @@ describe('Testing POST User Creation Validations', () => {
             .send({
                 "email": "notRegistered@test.com",
                 "password": "123456"
-            })
+            });
             
             assert.equal(response.status, 401);
+            assert.equal(response.type, 'text/html');
             assert.equal(response.text, "User not registered");
-    })
+    });
 })
