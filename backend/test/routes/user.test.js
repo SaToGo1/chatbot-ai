@@ -5,7 +5,7 @@ const assert = chai.assert;
 import app from '../../dist/app.js'
 import User from "../../dist/models/User.js";
 
-import mongoose from 'mongoose';
+import mongoose, { mongo } from 'mongoose';
 import connectToDatabase from '../../dist/db/connection.js';
 
 chai.use(chaiHttp)
@@ -13,11 +13,18 @@ chai.use(chaiHttp)
 const baseRoute = '/api/v1/user'
 
 before(async () => {
-    await connectToDatabase();
+    connectToDatabase()
+    .then(() => {
+        const PORT = process.env.PORT || 5000;
+        app.listen(PORT, () => {
+        console.log(`Server Open at port ${PORT}`)
+        });
+    })
     await User.deleteOne({
-        "name": "Satogo",
-        "email": "satogo@test.com",
-    });
+            "name": "Satogo",
+            "email": "satogo@test.com",
+        });
+        console.log('checking');
 })
 
 describe('testing Tests', () => {
@@ -38,20 +45,17 @@ describe('testing Tests', () => {
     })
 })
 
-describe('Testing User reading', () => {
+describe('Testing Basic Requests', () => {
     it('GET the user', (done) => {
         chai.request(app)
             .get(baseRoute)
             .end((err, res) => {
-                console.log('hi on get')
                 assert.equal(res.status, 200)
                 done();
             })
     })
-})
 
-describe('Testing User Creation POST', () => {
-    it('creates an user', async () => {
+    it('POST signup creates an user', async () => {
         const response = await chai
             .request(app)
             .post(baseRoute+'/signup')
@@ -61,10 +65,25 @@ describe('Testing User Creation POST', () => {
                 "password": "123456"
             })
 
-            assert.equal(response.status, 200)
+            assert.equal(response.status, 201)
             assert.equal(response.body.message, "OK")
     })
 
+    it('POST login a user', async () => {
+        const response = await chai
+            .request(app)
+            .post(baseRoute+'/login')
+            .send({
+                "email": "satogo@test.com",
+                "password": "123456"
+            })
+
+            assert.equal(response.status, 200)
+            assert.equal(response.body.message, "OK")
+    })
+})
+
+describe('Testing POST User Creation Validations', () => {
     it('fails to post an user with bad email', (done) => {
         chai.request(app)
             .post(baseRoute+'/signup')
@@ -93,5 +112,39 @@ describe('Testing User Creation POST', () => {
                 assert.equal(res.body.errors[0].msg, 'password should contain atleast 6 characters')
                 done();
             })
+    })
+
+    it('fails to login a user with incorrect password', async () => {
+        const response = await chai
+            .request(app)
+            .post(baseRoute+'/login')
+            .send({
+                "email": "satogo@test.com",
+                "password": "654321abc"
+            })
+
+            assert.equal(response.status, 403);
+            assert.equal(response.text, "Incorrect password");
+    })
+
+    it('fails to login when user does not exist', async () => {
+        before(async () => {
+            console.log('mongoose connect: ', mongoose.connect.status)
+            await User.deleteOne({
+                "email": "notRegistered@test.com",
+                "password": "123456"
+                });
+                console.log('checking');
+        })
+        const response = await chai
+            .request(app)
+            .post(baseRoute+'/login')
+            .send({
+                "email": "notRegistered@test.com",
+                "password": "123456"
+            })
+            
+            assert.equal(response.status, 401);
+            assert.equal(response.text, "User not registered");
     })
 })
