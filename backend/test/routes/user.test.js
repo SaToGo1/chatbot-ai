@@ -24,7 +24,6 @@ before(async () => {
             "name": "Satogo",
             "email": "satogo@test.com",
         });
-        console.log('checking');
 })
 
 describe('testing Tests', () => {
@@ -84,6 +83,12 @@ describe('Testing Basic Requests', () => {
 })
 
 describe('Testing POST User Creation Validations', () => {
+    before(async () => {
+        await User.deleteOne({
+            "email": "notRegistered@test.com"
+        });
+    })
+
     it('fails to post an user with bad email', (done) => {
         chai.request(app)
             .post(baseRoute+'/signup')
@@ -128,14 +133,6 @@ describe('Testing POST User Creation Validations', () => {
     })
 
     it('fails to login when user does not exist', async () => {
-        before(async () => {
-            console.log('mongoose connect: ', mongoose.connect.status)
-            await User.deleteOne({
-                "email": "notRegistered@test.com",
-                "password": "123456"
-                });
-                console.log('checking');
-        })
         const response = await chai
             .request(app)
             .post(baseRoute+'/login')
