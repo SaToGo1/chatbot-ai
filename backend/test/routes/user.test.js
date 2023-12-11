@@ -85,7 +85,7 @@ describe('Testing Basic Requests', () => {
     });
 })
 
-describe('Testing POST User Creation Validations', () => {
+describe('User signup catch errors', () => {
     before(async () => {
         await User.deleteOne({
             "email": "notRegistered@test.com"
@@ -124,6 +124,20 @@ describe('Testing POST User Creation Validations', () => {
             });
     });
 
+    it('fails to post an user with empty body', (done) => {
+        chai.request(app)
+            .post(baseRoute+'/signup')
+            .send({})
+            .end((err, res) => {
+                assert.equal(res.status, 422);
+                assert.equal(res.body.errors[0].msg, 'Name is required'); //name is the first validation
+                assert.equal(res.type, 'application/json');
+                done();
+            });
+    });
+})
+
+describe('User login catch errors', () => {
     it('fails to login a user with incorrect password', async () => {
         const response = await chai
             .request(app)
@@ -150,5 +164,17 @@ describe('Testing POST User Creation Validations', () => {
             assert.equal(response.status, 401);
             assert.equal(response.type, 'text/html');
             assert.equal(response.text, "User not registered");
+    });
+
+    it('empty', async () => {
+        const response = await chai
+            .request(app)
+            .post(baseRoute+'/login')
+            .send({ });
+            
+            assert.equal(response.status, 422);
+            assert.equal(response.type, 'application/json');
+            assert.equal(response.body.errors[0].msg, "Invalid value");
+            assert.equal(response.body.errors[1].msg, "email is required");
     });
 })
