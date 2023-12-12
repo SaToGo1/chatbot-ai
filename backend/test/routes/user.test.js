@@ -166,7 +166,7 @@ describe('User login catch errors', () => {
             assert.equal(response.text, "User not registered");
     });
 
-    it('empty', async () => {
+    it('fails to login with an empty body', async () => {
         const response = await chai
             .request(app)
             .post(baseRoute+'/login')
