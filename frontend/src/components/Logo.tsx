@@ -16,10 +16,12 @@ export default function Logo () {
           sx={{
             fontWeight: "800",
             textShadow: '2px 2px 20px #000',
-            fontSize: '20px'
+            fontSize: '20px',
+            display: 'flex',
+            alignItems: 'center'
           }}
         >
-            CloneGPT <span style={{ fontSize: '30px'}}>●</span>
+            CloneGPT <span style={{ fontSize: '37px', width: '30px', height: '59px'}}>●</span>
         </Typography>
       </Link>
     </div>
