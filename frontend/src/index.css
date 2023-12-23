@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Roboto:wght@300;400;500;700;900&display=swap');
+:root {
+  --pink-color: #D292FF;
+}
 
 html, body {
   margin: 0;
@@ -6,4 +9,12 @@ html, body {
   background: #05101c;
   color: white;
   font-family: "Roboto", serif;
+}
+
+body {
+  height: 100vh;
+}
+
+#root { 
+  height: 100vh;
 }

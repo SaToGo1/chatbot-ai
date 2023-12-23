@@ -1,5 +1,4 @@
-// import './App.css'
-import Header from "./components/Header"
+// import Header from "./components/Header"
 import { Routes, Route } from 'react-router-dom'
 import Home from "./pages/Home"
 import Login from "./pages/Login"
@@ -9,7 +8,6 @@ import Chat from "./pages/Chat"
 function App() {
   return (
     <main>
-      <Header />
       <Routes>
         <Route path='/' element={ <Home />}/>
         <Route path='/login' element={ <Login />}/>
