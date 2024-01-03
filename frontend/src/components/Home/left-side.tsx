@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import { Typography } from "@mui/material"
 import Header from "../Header.tsx"
 
@@ -19,13 +20,13 @@ export function LeftSide () {
 
 const pinkColor = 'var(--pink-color)'
 
-const leftSideStyle = {
+const leftSideStyle: CSSProperties = {
   height: '100%',
-  backgroundColor: 'rgb(0 0 46)',
+  backgroundColor: 'rgb(0, 0, 46)',
   color: 'var(--pink-color)',
 }
 
-const leftTextDiv = {
+const leftTextDiv: CSSProperties = {
   position: 'absolute',
   top: 'calc(50% - 80px)',
 }
