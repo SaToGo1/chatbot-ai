@@ -19,8 +19,17 @@ export function RightSide () {
         </div>
       </div>
       <div style={bot}>
-        <div><img src={openAI}></img></div>
-        <div>terms ...</div>
+        <div style={iconDiv}>
+          <img src={openAI} style={icon}></img>
+          <Typography variant='h6'>
+            UnlockedAI
+          </Typography>
+        </div>
+        <div style={botLinksDiv}>
+          <Button>Terms of use</Button>
+          <p> | </p>
+          <Button>Privacy Policy</Button>
+        </div>
       </div>
     </div>
   )
@@ -50,6 +59,24 @@ const accountPanel: CSSProperties = {
 }
 
 const bot: CSSProperties = {
-  border: '1px solid black',
   flex: '1',
+}
+
+const icon: CSSProperties = {
+  width: '22px',
+}
+
+const iconDiv: CSSProperties = {
+  display: 'flex',
+  marginTop: '40px',
+  justifyContent: 'center',
+  alignItems: 'center',
+  gap: '10px',
+}
+
+const botLinksDiv: CSSProperties = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  gap: '10px',
 }
