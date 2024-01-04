@@ -4,9 +4,9 @@ import Button from '@mui/material/Button'
 import openAI from '../../assets/openAI.svg'
 // import Header from "../Header.tsx"
 
-export function RightSide () {
+export function InteractionSide () {
   return (
-    <div style={rightSideStyle}>
+    <div style={interactionSideStyle}>
       <div style={top}>
         <Typography variant='h4' component='h2' sx={{ fontWeight: '600'}}>Get Started</Typography>
         <div style={accountPanel}>
@@ -35,7 +35,7 @@ export function RightSide () {
   )
 }
 
-const rightSideStyle: CSSProperties = {
+const interactionSideStyle: CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   padding: '32px 24px',

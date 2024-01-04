@@ -2,11 +2,11 @@ import { CSSProperties } from 'react';
 import { Typography } from "@mui/material"
 import Header from "../Header.tsx"
 
-export function LeftSide () {
+export function DecorationSide () {
   return (
-    <div style={leftSideStyle}>
+    <div style={decorationSideStyle}>
       <Header />
-      <div style={leftTextDiv}>
+      <div style={decorationTextDiv}>
         <Typography variant='h2' color={pinkColor} >
           Text 1
         </Typography>
@@ -20,13 +20,13 @@ export function LeftSide () {
 
 const pinkColor = 'var(--pink-color)'
 
-const leftSideStyle: CSSProperties = {
+const decorationSideStyle: CSSProperties = {
   height: '100%',
   backgroundColor: 'rgb(0, 0, 46)',
   color: 'var(--pink-color)',
 }
 
-const leftTextDiv: CSSProperties = {
+const decorationTextDiv: CSSProperties = {
   position: 'absolute',
   top: 'calc(50% - 80px)',
 }
