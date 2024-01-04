@@ -2,6 +2,8 @@ import { CSSProperties } from 'react'
 import { Typography } from '@mui/material'
 import Button from '@mui/material/Button'
 import openAI from '../../assets/openAI.svg'
+import { Link } from 'react-router-dom'
+import { Link as MuiLink} from '@mui/material'
 // import Header from "../Header.tsx"
 
 export function InteractionSide () {
@@ -10,10 +12,10 @@ export function InteractionSide () {
       <div style={top}>
         <Typography variant='h4' component='h2' sx={{ fontWeight: '600'}}>Get Started</Typography>
         <div style={accountPanel}>
-          <Button variant='contained' size='large'>
+          <Button variant='contained' size='large' component={Link} to='/login'>
             Log in
           </Button>
-          <Button variant='contained'>
+          <Button variant='contained' component={Link} to='/signup'>
             Sign Up
           </Button>
         </div>
@@ -26,9 +28,9 @@ export function InteractionSide () {
           </Typography>
         </div>
         <div style={botLinksDiv}>
-          <Button>Terms of use</Button>
+          <MuiLink href="#">Terms of use</MuiLink>
           <p> | </p>
-          <Button>Privacy Policy</Button>
+          <MuiLink href="#">Privacy Policy</MuiLink>
         </div>
       </div>
     </div>

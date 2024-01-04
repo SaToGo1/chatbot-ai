@@ -8,8 +8,8 @@ import { AuthProvider } from './context/auth-context.tsx'
 
 const theme = createTheme({
   typography: { 
-    fontFamily: "Roboto, serif", 
-    allVariants: {color: "white"}
+    fontFamily: 'Roboto, serif', 
+    allVariants: {color: 'white'},
   }
 });
 
