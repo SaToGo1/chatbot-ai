@@ -1,6 +1,7 @@
 import { Typography } from '@mui/material'
 import HeaderLogin from '../components/header-login'
 import { CSSProperties } from 'react'
+import { IoLogInOutline } from "react-icons/io5"
 
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
@@ -23,7 +24,6 @@ export default function Login() {
               type='email'
               variant='outlined'  
               sx={{mb: 3}}
-              color='secondary'
               fullWidth
               // value={email} state
               // error={emailError} state
@@ -45,7 +45,7 @@ export default function Login() {
               // onChange ={e=>setPassword...}
               required
             />
-            <Button variant='contained' color="secondary" type='submit'>Submit</Button>
+            <Button variant='contained' color="secondary" type='submit' endIcon={<IoLogInOutline />}>Log In</Button>
           </form>
           <small style={letter}>Need an account? <Link to="/">Register here</Link></small>
       </div>
