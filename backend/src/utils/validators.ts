@@ -32,14 +32,19 @@ export const validate = (validations: ValidationChain[]) => {
 
 // VALIDATION CHAINS, 
 export const loginValidator = [
-    body("email").trim().notEmpty().isEmail().withMessage('email is required'),
-    body("password")
+    body('email').trim().notEmpty().isEmail().withMessage('email is required'),
+    body('password')
         .trim()
         .isLength({ min: 6 })
         .withMessage('password should contain atleast 6 characters'),
 ]
 
 export const signupValidator = [
-    body("name").notEmpty().withMessage('Name is required'),
+    body('name').notEmpty().withMessage('Name is required'),
+    ...loginValidator
+]
+
+export const chatCompletionValidator = [
+    body('message').notEmpty().withMessage('Message is required'),
     ...loginValidator
 ]
