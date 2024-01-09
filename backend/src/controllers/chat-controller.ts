@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import User from "../models/User.js";
-import { openAIClient } from "../config/openai-config.js";
+import { configureOpenAIClient } from "../config/openai-config.js";
 import OpenAI from 'openai';
 
 export async function generateChatCompletion(
@@ -8,6 +8,7 @@ export async function generateChatCompletion(
   res: Response,
   next: NextFunction
 ) {
+  const openAIClient = configureOpenAIClient()
   const { message } = req.body;
   try {
     const user = await User.findById(res.locals.jwtData.id);
