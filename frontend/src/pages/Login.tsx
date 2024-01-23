@@ -49,7 +49,6 @@ export default function Login() {
               fullWidth
               // value={email} state
               // error={emailError} state
-              // onChange ={e=>setEmail...}
               required
             />
             <TextField 
@@ -65,7 +64,6 @@ export default function Login() {
               fullWidth
               // value={password} state
               // error={passwordError} state
-              // onChange ={e=>setPassword...}
               required
             />
             <Button variant='contained' color="secondary" type='submit' endIcon={<IoLogInOutline />}>Log In</Button>

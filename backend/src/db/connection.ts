@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 export default async function connectToDatabase() {
     try {
-        console.log('mongo', process.env.URI)
         if (!process.env.URI) {
             throw new Error('mongo url not defined')
         }
